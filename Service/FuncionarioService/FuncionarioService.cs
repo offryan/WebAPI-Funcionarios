@@ -129,6 +129,8 @@ namespace WebAPI_Funcionarios.Service.FuncionarioService
                     serviceResponse.Dados = null;
                     serviceResponse.Mensagem = "Usuário não existe!";
                     serviceResponse.Sucesso = false;
+
+                    return serviceResponse;
                 }
 
                 funcionario.Ativo = false;
@@ -160,9 +162,13 @@ namespace WebAPI_Funcionarios.Service.FuncionarioService
                     serviceResponse.Dados = null;
                     serviceResponse.Mensagem = "Usuário não existe!";
                     serviceResponse.Sucesso = false;
+
+                    return serviceResponse;
                 }
 
-                funcionario.DataDeAlteracao = DateTime.Now.ToLocalTime();
+                // mantém a data de criação original e registra a alteração no registro que é salvo
+                editFuncionario.DataDeCriacao = funcionario.DataDeCriacao;
+                editFuncionario.DataDeAlteracao = DateTime.Now.ToLocalTime();
 
                 _context.Funcionarios.Update(editFuncionario);
                 await _context.SaveChangesAsync();

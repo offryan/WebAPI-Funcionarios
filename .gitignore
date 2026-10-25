@@ -1,0 +1,9 @@
+# Saídas de build
+bin/
+obj/
+
+# Arquivos locais do Visual Studio / Rider
+.vs/
+.idea/
+*.user
+*.suo
